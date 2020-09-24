@@ -39,8 +39,8 @@ public class DemoData implements CommandLineRunner {
             Optional<Role> role_admin = roleService.findByRoleName("ROLE_ADMIN");
 
             User user = new User();
-            user.setUserName("admin");
-            user.setPassword("123");
+            user.setUserName("***");
+            user.setPassword("***");
             user.setRoles(new ArrayList<>());
             user.getRoles().add(role_admin.orElse(null));
 
