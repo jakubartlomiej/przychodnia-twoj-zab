@@ -16,6 +16,7 @@ Utworzone konta do testowania(login/hasło):
 * Hibernate
 * Thymeleaf
 * Lombook
+* Maven
 * MySql
 
 
