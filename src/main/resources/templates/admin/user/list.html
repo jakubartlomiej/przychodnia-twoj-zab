@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+	<meta charset="UTF-8">
+	<th:block th:include="fragments/admin :: header"></th:block>
+</head>
+<body>
+
+<nav th:replace="fragments/admin :: navbar"></nav>
+
+<div class="container">
+		
+	<br>
+	<h3 class="text-center">Lista użytkowników</h3>
+	<br>
+	<br>
+	
+	<table class="table table-striped">
+	    <tr class="thead-dark">
+	        <th>Nazwa użytkownika</th>
+	        <th>Imię</th>
+	        <th>Nazwisko</th>
+	        <th>PESEL</th>
+	        <th>Uprawnienia</th>
+	        <th>Wyświetl dane</th>
+	    </tr>
+	    <tr th:each="user : ${users}">
+	        <td th:text="${user.userName}"></td>
+	        <td th:text="${user.firstName}"></td>
+	        <td th:text="${user.lastName}"></td>
+	        <td th:text="${user.personalIdentityNumber}"></td>
+	        <td>
+	            <span th:each="role, iterStat : ${user.roles}"
+	                  th:text="${!iterStat.last} ? ${role.simplifiedRoleName} + ', ': ${role.simplifiedRoleName}">
+	            </span>
+	        </td>
+	        <td class="text-center">
+	        	<a class="btn btn-primary" th:href="@{|/admin/user/${user.id}|}">Info</a>
+        	</td>
+	    </tr>
+	</table>
+	
+	<br><br>
+	
+	<a class="btn btn-primary float-right" th:href="@{/admin/user/add}">Dodaj nowego użytkownika</a>
+	<br><br>
+	
+</div>
+
+<div th:replace="fragments/admin :: scripts"></div>
+</body>
+</html>

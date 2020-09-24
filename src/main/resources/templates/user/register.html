@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+
+</head>
+<body>
+
+<h1>Zarejestruj się</h1>
+<form method="post" th:action="@{/register}" th:object="${user}">
+    <input placeholder="Nazwa użytkownika" th:field="*{userName}" type="text">
+    <span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}"> </span> 
+    <span th:if="${uniqueErrors}">
+    	<span th:if="${uniqueErrors.containsKey('userName')}" th:text="${uniqueErrors.get('userName')}"></span>
+    </span><br>
+    <input placeholder="Hasło" th:field="*{password}" type="password">
+    <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"> </span> <br>
+    <input placeholder="Adres email" th:field="*{email}" type="email">
+    <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"> </span> 
+        <span th:if="${uniqueErrors}">
+    	<span th:if="${uniqueErrors.containsKey('email')}" th:text="${uniqueErrors.get('email')}"></span>
+    </span><br>
+    <input placeholder="Imię" th:field="*{firstName}" type="text">
+    <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"> </span> <br>
+    <input placeholder="Nazwisko" th:field="*{lastName}" type="text">
+    <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"> </span> <br>
+    <input placeholder="PESEL" th:field="*{personalIdentityNumber}" type="text">
+    <span th:if="${#fields.hasErrors('personalIdentityNumber')}" th:errors="*{personalIdentityNumber}"> </span>
+    <span th:if="${uniqueErrors}">
+    	<span th:if="${uniqueErrors.containsKey('personalIdentityNumber')}" th:text="${uniqueErrors.get('personalIdentityNumber')}"></span>
+    </span><br>
+    <input placeholder="Miejscowość" th:field="*{city}" type="text">
+    <span th:if="${#fields.hasErrors('city')}" th:errors="*{city}"> </span> <br>
+    <input placeholder="Ulica" th:field="*{street}" type="text"> <br>
+    <input placeholder="Numer lokalu" th:field="*{houseNumber}" type="text">
+    <span th:if="${#fields.hasErrors('houseNumber')}" th:errors="*{houseNumber}"> </span> <br>
+    <input placeholder="Numer mieszkania" th:field="*{flatNumber}" type="text"> <br>
+    <input placeholder="Kod pocztowy" th:field="*{postalCode}" type="text">
+    <span th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"> </span> <br>
+    <input placeholder="Numer telefonu" th:field="*{phone}" type="text">
+    <span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"> </span> <br>
+    <input type="submit" value="Zarejestruj">
+</form>
+</body>
+</html>

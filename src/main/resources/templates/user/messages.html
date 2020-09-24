@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+	<meta charset="UTF-8">
+	<th:block th:include="fragments/user :: header"></th:block>
+</head>
+<body>
+
+<nav th:replace="fragments/user :: navbar"></nav>
+
+<div class="container">
+		
+	<br>
+	<h3 class="text-center">Historia wiadomosci</h3>
+	<br>
+	<br>
+	
+	<div  th:each="message : ${messages}">
+		<div class="card">
+			<h5 class="card-header" th:text="${#temporals.format(message.createDateTime, 'dd-MM-yyyy HH:mm')}"></h5>
+			<div class="card-body">
+				<p class="card-text" th:text="${message.text}"></p>
+			</div>
+		</div>
+		<br>
+	</div>
+
+	<br><br>
+	
+</div>
+
+<div th:replace="fragments/user :: scripts"></div>
+</body>
+</html>
+
+<meta charset="UTF-8">

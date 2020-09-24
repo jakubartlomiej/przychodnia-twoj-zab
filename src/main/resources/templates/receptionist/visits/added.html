@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <th:block th:include="fragments/receptionistLessMessage :: header"></th:block>
+</head>
+<body>
+<nav th:replace="fragments/receptionistLessMessage :: navbar"></nav>
+<br>
+<div class="container">
+<h1>Wizyta została zapisana </h1>
+</div>
+</body>
+<div th:replace="fragments/receptionistLessMessage :: scripts"></div>
+</html>
+<style>
+    .container {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+</style>

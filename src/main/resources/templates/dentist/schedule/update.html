@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <th:block th:include="fragments/dentist :: header"></th:block>
+    <meta charset="UTF-8">
+</head>
+<body>
+<nav th:replace="fragments/dentist :: navbar"></nav>
+<br>
+<div class="container">
+    <h3 class="text-center">Edytuj godziny pracy:</h3>
+    <form method="post" th:action="@{'/dentist/schedule/delete/'+${scheduleById.get().getId()}}">
+        <table class="table table-striped">
+            <tr>
+                <td>Data: </td>
+                <td><input class="form-control" type="date"
+                           th:value="${#temporals.format(scheduleById.get().getDate(),'yyyy-MM-dd')}" name="date" id="date" readonly></td>
+            </tr>
+            <tr>
+                <td>Rozpoczęcie: </td>
+                <td><input class="form-control" type="text" th:value="${scheduleById.get().getStartDay()}" readonly>
+                </td>
+            </tr>
+            <tr>
+                <td>Zakończenie: </td>
+                <td><input class="form-control" type="text" th:value="${scheduleById.get().getEndDay()}" readonly></td>
+            </tr>
+        </table>
+        <div class="float-right">
+            <th:block th:if="${visitsInDay} > 0">
+                <input class="btn btn-danger" type="submit" value="Usuń" disabled>
+            </th:block>
+            <th:block th:unless="${visitsInDay} > 0">
+                <input class="btn btn-danger" type="submit" value="Usuń">
+            </th:block>
+                <a class="btn btn-primary"
+                   th:href="@{'/dentist/schedule/week/'+${#temporals.format(scheduleById.get().getDate(),'yyyy-MM-dd')}}">Wróc do listy</a>
+        </div>
+        <th:block th:if="${visitsInDay} > 0">
+            <p>W tym dniu masz już zaplanowane wizyty w liczbie (<span th:text="${visitsInDay}"></span>), skontaktuj się z recepcją w celu odwołania wizyt.</p>
+        </th:block>
+    </form>
+</div>
+<div th:replace="fragments/dentist :: scripts"></div>
+</body>
+</html>

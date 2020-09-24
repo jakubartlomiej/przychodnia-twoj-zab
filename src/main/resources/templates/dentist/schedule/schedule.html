@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <th:block th:include="fragments/dentist :: header"></th:block>
+    <meta charset="UTF-8">
+</head>
+<body>
+<nav th:replace="fragments/dentist :: navbar"></nav>
+<br>
+<div class="container">
+    <h2>Dodaj godziny dostępności w gabinecie</h2>
+    <br>
+    <form method="post" th:action="@{/dentist/schedule/week}">
+        <span>Data: </span>
+        <input type="date" name="inputDateString" required>
+        <input type="submit" value="Przejdź">
+    </form>
+    <br>
+    <div class="table-responsive ">
+        <table class="table table-bordered table-hover">
+            <tr class="thead-dark">
+                <th>DATA</th>
+                <th>POCZĄTEK</th>
+                <th>KONIEC</th>
+                <th>OPCJE</th>
+            </tr>
+            <tr th:each="i : ${#numbers.sequence(1,7)}" th:value="day">
+                <td th:text="${#temporals.format(today.plusDays(i).minusDays(dayOfWeek), 'dd-MM-yyyy')}"></td>
+                <th:block th:each="freeDay : ${freeDayInWeek}">
+                    <th:block th:if="${freeDay.isAfter(freeDay.now())} or ${freeDay.isEqual(freeDay.now())}">
+                        <th:block
+                                th:if="${#temporals.format(today.plusDays(i).minusDays(dayOfWeek), 'yyyy-MM-dd')} == ${freeDay.toString()}">
+                            <td>Uzupełnij dane</td>
+                            <td>Uzupełnij dane</td>
+                            <td>
+                                <a class="btn btn-primary"
+                                   th:href="@{'/dentist/schedule/add/' +${#temporals.format(today.plusDays(i).minusDays(dayOfWeek), 'yyyy-MM-dd')}}">Dodaj</a>
+                            </td>
+                        </th:block>
+                    </th:block>
+                    <th:block th:unless="${freeDay.isAfter(freeDay.now())} or ${freeDay.isEqual(freeDay.now())}">
+                        <th:block
+                                th:if="${#temporals.format(today.plusDays(i).minusDays(dayOfWeek), 'yyyy-MM-dd')} == ${freeDay.toString()}">
+                            <td>Brak danych</td>
+                            <td>Brak danych</td>
+                            <td>-</td>
+                        </th:block>
+                    </th:block>
+                </th:block>
+                <th:block th:each="schedule :${daysSchedule}">
+                    <th:block
+                            th:if="${schedule.getDate().isAfter(schedule.getDate().now())} or ${schedule.getDate().isEqual(schedule.getDate().now())}">
+                        <th:block
+                                th:if="${#temporals.format(today.plusDays(i).minusDays(dayOfWeek), 'yyyy-MM-dd')} == ${#temporals.format(schedule.getDate(),'yyyy-MM-dd')}">
+                            <td th:text="${schedule.getStartDay()}">Start day</td>
+                            <td th:text="${schedule.getEndDay()}">End day</td>
+                            <td><a class="btn btn-warning"
+                                   th:href="@{'/dentist/schedule/update/' + ${schedule.getId()}}">Edytuj</a></td>
+                        </th:block>
+                    </th:block>
+                    <th:block
+                            th:unless="${schedule.getDate().isAfter(schedule.getDate().now())} or ${schedule.getDate().isEqual(schedule.getDate().now())}">
+                        <th:block
+                                th:if="${#temporals.format(today.plusDays(i).minusDays(dayOfWeek), 'yyyy-MM-dd')} == ${#temporals.format(schedule.getDate(),'yyyy-MM-dd')}">
+                            <td th:text="${schedule.getStartDay()}">Start day</td>
+                            <td th:text="${schedule.getEndDay()}">End day</td>
+                            <td>-</td>
+                        </th:block>
+                    </th:block>
+                </th:block>
+            </tr>
+        </table>
+    </div>
+</div>
+<div th:replace="fragments/dentist :: scripts"></div>
+</body>
+</html>
+<style>
+    .container {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+</style>

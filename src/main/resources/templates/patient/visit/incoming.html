@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments/patient :: header"></th:block>
+    <meta charset="UTF-8">
+</head>
+<body>
+<nav th:replace="fragments/patient :: navbar"></nav>
+<br>
+<div class="container">
+    <h2>Moje wizyty</h2>
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>Data</th>
+            <th>Godzina</th>
+            <th>Lekarz</th>
+            <th>Odwołaj</th>
+        </tr>
+        <th:block th:each="visit : ${visits}">
+            <th:block th:if="${visit.getDate().plusHours(visit.getStart().getHour()).isAfter(visit.getDate().now())}">
+                <tr>
+                    <td th:text="${#temporals.format(visit.getDate(), 'dd-MM-yyyy')}"></td>
+                    <td th:text="${visit.getStart()}"></td>
+                    <td th:text="${visit.getDoctor().getFirstName()}+' '+${visit.getDoctor().getLastName()}"></td>
+                    <td>
+            <span th:if="${visit.getDate().plusHours(visit.getStart().getHour()).isAfter(visit.getDate().now())}">
+                 <a class="btn btn-danger" th:href="@{'/patient/visit/delete/'+ ${visit.id}}">Odwołaj</a>
+            </span>
+                        <span th:unless="${visit.getDate().plusHours(visit.getStart().getHour()).isAfter(visit.getDate().now())}"> - </span>
+                    </td>
+                </tr>
+            </th:block>
+        </th:block>
+    </table>
+</div>
+<div th:replace="fragments/patient :: scripts"></div>
+</body>
+</html>
+<style>
+    .container {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+</style>

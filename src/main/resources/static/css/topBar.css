@@ -1,0 +1,28 @@
+nav {
+    background: #526577;
+    color: white;
+}
+
+nav .container {
+    width: 1000px;
+    margin: auto;
+}
+
+li {
+    background: #ff6348;
+    display: inline-block;
+    margin: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+li:hover {
+    background: #c5533b;
+}
+
+nav a {
+    color: white;
+    display: inline-block;
+    text-decoration: none;
+    padding: 10px 20px;
+}

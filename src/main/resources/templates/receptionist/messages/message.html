@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <th:block th:include="fragments/receptionist :: header"></th:block>
+</head>
+<body>
+<nav th:replace="fragments/receptionist :: navbar"></nav>
+<br>
+<div class="container">
+<h3>Wiadomość</h3>
+    <br>
+    <table class="table table-striped">
+        <tr>
+            <td>Nadwaca: </td>
+            <td th:text="${message.email}"></td>
+        </tr>
+        <tr>
+            <td>E-mail: </td>
+            <td th:text="${message.email}"></td>
+        </tr>
+        <tr>
+            <td>Numer telefonu: </td>
+            <td th:text="${message.number}"></td>
+        </tr>
+        <tr>
+            <td colspan="2" th:text="${message.text}" ></td>
+        </tr>
+    </table>
+</div>
+<div th:replace="fragments/receptionist :: scripts"></div>
+</body>
+</html>
+<style>
+    .container {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <th:block th:include="fragments/receptionist :: header"></th:block>
+</head>
+<body>
+
+<nav th:replace="fragments/receptionist :: navbar"></nav>
+<br>
+<div class="container">
+    <h3>Wiadomości</h3>
+    <br>
+    <table class="table table-striped">
+        <tr>
+            <th>Przeczytana</th>
+            <th>Imię i nazwisko</th>
+            <th>email</th>
+            <th>Numer telefonu</th>
+            <th>Treść</th>
+            <th>Usuń</th>
+        </tr>
+        <tr th:each="message : ${messages}">
+            <td th:if="${message.opened}">tak</td>
+            <td th:if="!${message.opened}">nie</td>
+            <td th:text="${message.name}"></td>
+            <td th:text="${message.email}"></td>
+            <td th:text="${message.number}"></td>
+            <td><a class="btn btn-primary" th:href="@{|/receptionist/message/${message.id}|} ">Odczytaj wiadomość </a>
+            </td>
+            <td><a class="btn btn-danger" th:href="@{|/receptionist/message/${message.id}/delete|} ">X</a></td>
+        </tr>
+    </table>
+</div>
+<div th:replace="fragments/receptionist :: scripts"></div>
+</body>
+</html>
+<style>
+    .container {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+</style>

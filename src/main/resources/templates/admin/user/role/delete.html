@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+	<meta charset="UTF-8">
+	<th:block th:include="fragments/admin :: header"></th:block>
+</head>
+<body>
+
+<nav th:replace="fragments/admin :: navbar"></nav>
+
+<br>
+<br>
+
+<div class="container">
+	<form th:object="${role}" method="post">
+	
+	    <h3>Zabierz uprawnienia użytkownikowi: </h3>
+	    <select th:field="*{id}" title="role">
+	        <option th:each="role : ${roles}" th:text="${role.simplifiedRoleName}" th:value="${role.id}"></option>
+	    </select>
+	    <input type="submit" value="Ok">
+	
+	</form>
+</div>
+
+<div th:replace="fragments/admin :: scripts"></div>
+</body>
+</html>

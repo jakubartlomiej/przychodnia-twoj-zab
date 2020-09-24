@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <th:block th:include="fragments/patient :: header"></th:block>
+</head>
+<body>
+<nav th:replace="fragments/patient :: navbar"></nav>
+<div class="container">
+    <h1>Twoja wizyta została odwołana</h1>
+</div>
+<div th:replace="fragments/patient :: scripts"></div>
+</body>
+</html>
+<style>
+    .container {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+</style>

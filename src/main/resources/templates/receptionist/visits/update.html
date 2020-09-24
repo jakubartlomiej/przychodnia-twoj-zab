@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments/receptionistLessMessage :: header"></th:block>
+    <meta charset="UTF-8">
+</head>
+<body>
+<nav th:replace="fragments/receptionistLessMessage :: navbar"></nav>
+<br>
+<div class="container">
+    <h3 class="text-center">Odwołaj wizytę: </h3>
+    <form method="post" th:action="@{'/receptionist/visit/register/update/'+${visitsCalendar.getId()}}"
+          th:object="${visitsCalendar}">
+        <table class="table table-striped">
+            <tr>
+                <td>Data:</td>
+                <td><input class="form-control" type="text"
+                           th:value="${#temporals.format(visitsCalendar.getDate(),'dd-MM-yyyy')}" name="date" id="date"
+                           readonly></td>
+            </tr>
+            <tr>
+                <td>Godzina rozpoczęcia:</td>
+                <td><input class="form-control" type="text" th:field="*{start}" readonly></td>
+            </tr>
+            <tr>
+                <td>Godzina zakończenia:</td>
+                <td><input class="form-control" type="text" th:field="*{end}" readonly></td>
+            </tr>
+            <tr>
+                <td> Lekarz:</td>
+                <td><input class="form-control" type="text"
+                           th:value="${visitsCalendar.getDoctor().getLastName()} + ' '+ ${visitsCalendar.getDoctor().getFirstName()}"
+                           name="doctor" id="doctor" readonly></td>
+            </tr>
+            <tr>
+                <td> Pacjent:</td>
+                <td><input class="form-control" type="text"
+                           th:value="${visitsCalendar.getPatient().getLastName()} + ' '+ ${visitsCalendar.getPatient().getFirstName()}"
+                           name="patient" id="patient" readonly></td>
+            </tr>
+        </table>
+        <div class="float-right">
+            <input class="btn btn-danger" type="submit" value="Odwołaj">
+            <a class="btn btn-primary"
+               th:href="@{'/receptionist/visit/register/'+${#temporals.format(visitsCalendar.getDate(),'yyyy-MM-dd')}+'/'+${visitsCalendar.getDoctor().getId()}}">Wróc do listy</a>
+        </div>
+    </form>
+</div>
+<div th:replace="fragments/receptionistLessMessage :: scripts"></div>
+</body>
+</html>

@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "management.endpoint.mapping.enabled",
+  "type": "java.lang.String",
+  "description": "A description for 'management.endpoint.mapping.enabled'"
+}]}

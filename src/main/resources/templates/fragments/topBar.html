@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/topBar.css}">
+</head>
+<body>
+
+<nav>
+    <div class="container">
+        <ul>
+            <li>
+                <a th:href="@{'/'}">Strona główna</a>
+            </li>
+            <li sec:authorize="hasRole('PATIENT')">
+                <a th:href="@{/patient}">Panel pacjenta</a>
+            </li>
+            <li sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/admin}">Panel administratora</a>
+            </li>
+            <li sec:authorize="hasRole('RECEPTIONIST')">
+                <a th:href="@{/receptionist}">Panel recepcji</a>
+            </li>
+            <li sec:authorize="hasRole('DENTIST')">
+                <a th:href="@{/dentist}">Panel lekarza</a>
+            </li>
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{'/user'}">
+                    <i class="fas fa-user"></i> <span sec:authentication="name">Użytkownik</span>
+                </a>
+            </li>
+
+            <li sec:authorize="isAuthenticated()">
+                <a th:href="@{'/logout'}">Wyloguj się</a>
+            </li>
+            <li sec:authorize="isAnonymous()">
+                <a th:href="@{'/register'}">Utwórz konto</a>
+            </li>
+            <li sec:authorize="isAnonymous()">
+                <a th:href="@{/login}">Zaloguj sie</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+</body>
+</html>

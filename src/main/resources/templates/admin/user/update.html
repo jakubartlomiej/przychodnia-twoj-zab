@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+	<meta charset="UTF-8">
+	<th:block th:include="fragments/admin :: header"></th:block>
+</head>
+<body>
+
+<nav th:replace="fragments/admin :: navbar"></nav>
+
+<div class="container">
+	<form th:object="${user}" method="post">
+		<br>
+	    <h3 class="text-center">Edytuj dane użytkownika: </h3>
+		<br>
+	    <table class="table table-striped">
+			<tr>
+				<td>Nazwa użytkownika:</td>
+				<td>
+					<input class="form-control" th:field="*{userName}" title="nazwa" type="text">
+					<div class="alert alert-danger" th:errors="*{userName}"
+						 th:if="${#fields.hasErrors('userName')}"></div>
+					<div th:if="${uniqueErrors}">
+						<div class="alert alert-danger" th:if="${uniqueErrors.containsKey('userName')}"
+							 th:text="${uniqueErrors.get('userName')}"></div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>Imię:</td>
+				<td>
+					<input class="form-control" th:field="*{firstName}" type="text">
+					<div class="alert alert-danger" th:errors="*{firstName}"
+						 th:if="${#fields.hasErrors('firstName')}"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>Nazwisko:</td>
+				<td>
+					<input class="form-control" th:field="*{lastName}" type="text">
+					<div class="alert alert-danger" th:errors="*{lastName}"
+						 th:if="${#fields.hasErrors('lastName')}"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>Email:</td>
+				<td>
+					<input class="form-control" th:field="*{email}" type="text">
+					<div class="alert alert-danger" th:errors="*{email}" th:if="${#fields.hasErrors('email')}"></div>
+					<div th:if="${uniqueErrors}">
+						<div class="alert alert-danger" th:if="${uniqueErrors.containsKey('email')}"
+							 th:text="${uniqueErrors.get('email')}"></div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>PESEL:</td>
+				<td>
+					<input class="form-control" th:field="*{personalIdentityNumber}" type="number">
+					<div class="alert alert-danger" th:errors="*{personalIdentityNumber}"
+						 th:if="${#fields.hasErrors('personalIdentityNumber')}"></div>
+					<div th:if="${uniqueErrors}">
+						<div class="alert alert-danger" th:if="${uniqueErrors.containsKey('personalIdentityNumber')}"
+							 th:text="${uniqueErrors.get('personalIdentityNumber')}"></div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>Miejscowosc:</td>
+				<td>
+					<input class="form-control" th:field="*{city}" type="text">
+					<div class="alert alert-danger" th:errors="*{city}" th:if="${#fields.hasErrors('city')}"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>Ulica:</td>
+				<td><input class="form-control" th:field="*{street}" type="text"></td>
+			</tr>
+			<tr>
+				<td>Numer lokalu:</td>
+				<td>
+					<input class="form-control" th:field="*{houseNumber}" type="text">
+					<div class="alert alert-danger" th:errors="*{houseNumber}"
+						 th:if="${#fields.hasErrors('houseNumber')}"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>Numer mieszkania:</td>
+				<td><input class="form-control" th:field="*{flatNumber}" type="text"></td>
+			</tr>
+			<tr>
+				<td>Kod pocztowy:</td>
+				<td>
+					<input class="form-control" th:field="*{postalCode}" type="text">
+					<div class="alert alert-danger" th:errors="*{postalCode}"
+						 th:if="${#fields.hasErrors('postalCode')}"></div>
+				</td>
+			</tr>
+			<tr>
+				<td>Numer telefonu:</td>
+				<td>
+					<input class="form-control" th:field="*{phone}" type="text">
+					<div class="alert alert-danger" th:errors="*{phone}" th:if="${#fields.hasErrors('phone')}"></div>
+				</td>
+			</tr>
+		</table>
+
+		<a class="btn btn-primary" th:href="@{|/admin/user/${user.id}|}">Anuluj</a>
+		<input class="btn btn-primary float-right" type="submit" value="Potwierdz">
+
+	</form>
+	<br>
+	<br>
+</div>
+
+<div th:replace="fragments/admin :: scripts"></div>
+</body>
+</html>

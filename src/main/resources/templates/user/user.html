@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+	<meta charset="UTF-8">
+	<th:block th:include="fragments/user :: header"></th:block>
+</head>
+<body>
+
+<nav th:replace="fragments/user :: navbar"></nav>
+
+<br>
+<h2 class="text-center"> Witaj w panelu uzytkownika</h2>
+
+<div th:replace="fragments/user :: scripts"></div>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+    <th:block th:include="fragments/dentist :: header"></th:block>
+    <meta charset="UTF-8">
+</head>
+<body>
+<nav th:replace="fragments/dentist :: navbar"></nav>
+<br>
+<div class="container">
+    <h2>Grafik dentysty</h2>
+    <br>
+    <form method="post" th:action="@{/dentist/schedule/week}">
+        <span>Data: </span>
+        <input type="date" th:value="${inputDateString}" name="inputDateString" required>
+        <input type="submit" value="Przejdź">
+    </form>
+</div>
+<div th:replace="fragments/dentist :: scripts"></div>
+</body>
+</html>
+<style>
+    .container {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+</style>

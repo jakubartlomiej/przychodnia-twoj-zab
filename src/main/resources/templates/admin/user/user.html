@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+	<meta charset="UTF-8">
+	<th:block th:include="fragments/admin :: header"></th:block>
+</head>
+<body>
+
+<nav th:replace="fragments/admin :: navbar"></nav>
+
+<div class="container">
+	<br>
+	<br>
+	
+	<h3 class="text-center" th:text="${user.userName}"></h3>
+		
+	<br>
+	<table class="table table-striped">
+	    <tr>
+	    	<td>Imię:</td>
+	        <td th:text="${user.firstName}"></td>
+	    </tr>
+	    <tr>
+	    	<td>Nazwisko:</td>
+	        <td th:text="${user.lastName}"></td>
+	    </tr>
+	    <tr>
+	    	<td>Email:</td>
+	        <td th:text="${user.email}"></td>
+	    </tr>
+	    <tr>
+	    	<td>PESEL:</td>
+	        <td th:text="${user.personalIdentityNumber}"></td>
+	    </tr>
+	    <tr>
+	    	<td>Miejscowosc:</td>
+	        <td th:text="${user.city}"></td>
+	    </tr>
+	    <tr>
+	    	<td>Ulica:</td>
+	        <td th:text="${user.street}"></td>
+	    </tr>
+	    <tr>
+	    	<td>Numer lokalu:</td>
+	        <td th:text="${user.houseNumber}"></td>
+	    </tr>
+	    <tr>
+	    	<td>Numer mieszkania:</td>
+	        <td th:text="${user.flatNumber}"></td>
+	    </tr>
+	    <tr>
+	    	<td>Kod pocztowy:</td>
+	        <td th:text="${user.postalCode}"></td>
+	    </tr>
+	    <tr>
+	    	<td>Numer telefonu:</td>
+	        <td th:text="${user.phone}"></td>
+	    </tr>
+	    <tr>
+	    	<td>Uprawnienia:</td>
+	        <td>
+	        	<span th:each="role, iterStat : ${user.roles}"
+	                  th:text="${!iterStat.last} ? ${role.simplifiedRoleName} + ', ': ${role.simplifiedRoleName}">
+	            </span>
+            </td>
+	    </tr>
+	</table>
+
+	<br>
+	<div class="float-right">
+		<a class="btn btn-primary" th:href="@{|/admin/user/${user.id}/update|}">Edytuj</a>
+		<a class="btn btn-primary" th:href="@{|/admin/user/${user.id}/role/grant|}">Nadaj uprawnienia</a>
+		<a class="btn btn-danger" th:href="@{|/admin/user/${user.id}/role/delete|}">Zabierz uprawnienia</a>
+		<a class="btn btn-danger" th:href="@{|/admin/user/${user.id}/delete|}">Usuń</a>
+	</div>
+	<br><br>
+	
+</div>
+
+<div th:replace="fragments/admin :: scripts"></div>
+</body>
+</html>

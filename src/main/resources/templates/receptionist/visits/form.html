@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="fragments/receptionistLessMessage :: header"></th:block>
+    <meta charset="UTF-8">
+</head>
+<body>
+<nav th:replace="fragments/receptionistLessMessage :: navbar"></nav>
+<br>
+<div class="container">
+    <h2>Wyszukaj termin</h2>
+    <br>
+    <form method="post" th:action="@{/receptionist/visit/register}">
+        <label for="date">Data: </label>
+        <input type="date" name="date" id="date" required>
+        <label for="dentist">Lekarz: </label>
+        <select name="dentist" id="dentist" required>
+            <option value="" disabled selected>Wybierz dentystę</option>
+            <th:block th:each="dentist : ${dentistList}">
+                <option th:text="${dentist.getLastName()}+' '+${dentist.getFirstName()}" th:value="${dentist.getId()}"></option>
+            </th:block>
+        </select>
+        <input type="submit" value="Przejdź">
+    </form>
+</div>
+<div th:replace="fragments/receptionistLessMessage :: scripts"></div>
+</body>
+</html>
+<style>
+    .container{
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+    }
+</style>

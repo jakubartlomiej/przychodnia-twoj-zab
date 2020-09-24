@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pl">
+<head>
+	<meta charset="UTF-8">
+	<th:block th:include="fragments/admin :: header"></th:block>
+</head>
+<body>
+
+<nav th:replace="fragments/admin :: navbar"></nav>
+
+<form method="post" th:action="@{|/admin/contactData/update/${contactData.id}|}" th:object="${contactData}">
+
+	<br>
+    <h3 class="text-center">Dane Kontaktowe: </h3>
+    <br>
+    <div class="container"> 
+	    <table class="table table-striped">
+	        <tr>
+	            <td>Nazwa Przychodni:</td>
+	            <td><input class="form-control" title="nazwa" id="name" type="text" th:field="*{name}"></td>
+	        </tr>
+	        <tr>
+	            <td>Numer telefonu:</td>
+	            <td><input class="form-control" title="numer" type="text" th:field="*{number}"></td>
+	        </tr>
+	        <tr>
+	            <td>Email:</td>
+	            <td><input class="form-control" title="email" type="text" th:field="*{email}"></td>
+	        </tr>
+	        <tr>
+	            <td>Adres:</td>
+	            <td><input class="form-control" title="adress" type="text" th:field="*{address}"></td>
+	        </tr>
+	    </table>
+	    <br>
+	    <input class="btn btn-primary float-right" type="submit" value="Zaaktualizuj dane">
+    </div>
+
+</form>
+
+<div th:replace="fragments/admin :: scripts"></div>
+</body>
+</html>
